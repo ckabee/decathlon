@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: raw
+    database: analytics
+    schema: raw
+    tables:
+      - name: dim_model
+      - name: dim_store
+      - name: fact_sales
+      - name: fact_stocks
+      
