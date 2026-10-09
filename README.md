@@ -1,12 +1,12 @@
-# 🥪 The Jaffle Shop 🦘
+# decathlon 🦘
 
-_powered by the dbt Fusion engine_
+In 2023, a decision was made to reduce the number of product references available in stores. The sales director for
+Domyos identified a specific product (10 kg dumbbell kit) as a candidate for removal, given the availability of similar
+alternatives (20 kg dumbbell kits, unit weights). To evaluate this decision, a test was conducted over a 7-week period
+(weeks 35 to 41 in 2023) in a selection of stores. The test involved removing the 10 kg dumbbell kit from shelves to
+assess the economic impact on sales of similar products. The hypothesis is that sales of alternative products would
+increase, offsetting the revenue loss from the removed product
 
-Welcome! This is a sandbox project for exploring the basic functionality of Fusion. It's based on a fictional restaurant called the Jaffle Shop that serves [jaffles](https://en.wikipedia.org/wiki/Pie_iron).
+Analysis and presentation : 
+https://drive.google.com/file/d/14kasVpOxfYJCIjBwWIQ31WlC9mEw-iCW/view?usp=sharing
 
-To get started:
-1. Set up your database connection in `~/.dbt/profiles.yml`. If you got here by running `dbt init`, you should already be good to go.
-2. Run `dbt build`. That's it!
-
-> [!NOTE]
-> If you're brand-new to dbt, we recommend starting with the [dbt Learn](https://learn.getdbt.com/) platform. It's a free, interactive way to learn dbt, and it's a great way to get started if you're new to the tool.

@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: int_daily_sales
+    description: "Agrégation journalière des ventes (nettes des retours) par magasin et par catégorie de test."
+    columns:
+      - name: daily_sales_id
+        description: "Clé primaire générée via MD5(date + store + channel + category)."
+        tests:
+          - unique
+          - not_null
+      - name: nb_transactions
+        description: "Nombre de tickets de caisse distincts ayant contenu au moins un article de cette catégorie."
+        tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0

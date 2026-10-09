@@ -1,0 +1,36 @@
+semantic_models:
+  - name: sm_ab_test_performance
+    model: ref('mart_ab_test_sales_stock_reconciled')
+    
+    dimensions:
+      - name: is_test_store
+        type: categorical
+      - name: product_category
+        type: categorical
+      - name: transaction_channel_type
+        type: categorical
+    
+    measures:
+      - name: total_gmv
+        expr: total_gmv_eur
+        agg: sum
+      - name: transaction_count
+        expr: nb_transactions
+        agg: sum
+      - name: stock_available
+        expr: available_items_count
+        agg: sum
+      - name: stock_expected
+        expr: expected_items_count
+        agg: sum
+
+metrics:
+  - name: average_basket_value
+    description: "Panier moyen en euros"
+    type: derived
+    expr: total_gmv / transaction_count
+    
+  - name: availability_rate_pct
+    description: "Taux de disponibilité en rayon (capé à 100%)"
+    type: derived
+    expr: least((stock_available / nullif(stock_expected, 0)) * 100, 100.0)

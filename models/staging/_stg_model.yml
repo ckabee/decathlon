@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: stg_dim_model
+    description: "This table provides detailed information about models and their associated articles, which are variations of the models (e.g., size differences for a pair of shoes)."
+    columns:
+      - name: item_code
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_dim_store
+    description: "This table contains detailed information about stores, including their unique identifiers, physical characteristics, location, and whether they are part of a tested region. It also provides data on the store's product range classification within specific test families."
+    columns:
+      - name: store_code
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_fact_sales
+    description: "This table captures transactional data, providing details about customer purchases across stores and channels. Each transaction is uniquely identified and includes information on items bought, quantities, sales channels, and gross merchandise value (GMV)."
+    columns:
+      - name: item_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_dim_model')
+                field: item_code
+      - name: store_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_dim_store')
+                field: store_code
+                severity: warn
+
+  - name: stg_fact_stock
+    description: "This table records stock levels of items in various stores, providing insights into inventory management. It includes unique identifiers for stock entries, associated store and item codes, stock dates, and quantities available."
+    data_tests:
+      # Empêche les doublons pour un même article, magasin et date
+      - unique:
+          column_name: "(stock_date || '-' || store_code || '-' || item_code)"

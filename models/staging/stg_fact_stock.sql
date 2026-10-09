@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ source('raw', 'fact_stocks') }}
+    select * from {{ source('raw', 'fact_stock') }}
 ),
 
 casted as (
@@ -7,8 +7,8 @@ casted as (
         try_cast(stock_date as date) as stock_date,
         try_cast(store_code as integer) as store_code,
         try_cast(item_code as integer) as item_code,
-        try_cast(top_suivi as boolean) as top_suivi,
-        try_cast(top_available_stock as boolean) as top_available_stock
+        try_cast(top_suivi as boolean) as is_tracked,
+        try_cast(top_available_stock as boolean) as is_available_in_stock
     from source
 )
 
